@@ -6,6 +6,7 @@ This module contains the common functions and methods to provide a CLI for the p
 
 import argparse
 import json
+import traceback
 
 from pyahp import parse
 from pyahp.errors import AHPModelError
@@ -59,7 +60,8 @@ def main():
             print_priorities(model['alternatives'], ahp_model.get_priorities())
 
         except Exception as err:
-            print('\t[-] ERROR:{} {}'.format(err.__class__.__name__, err))
+            tb = traceback.format_exc()
+            print(f'\t[-] ERROR:{err.__class__.__name__} {err}\n{tb}')
 
 
 if __name__ == '__main__':
